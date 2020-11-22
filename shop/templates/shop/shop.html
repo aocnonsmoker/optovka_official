@@ -1,0 +1,20 @@
+{% extends 'first/base.html' %}
+{% load static %}
+{% block title %}
+{% endblock %}
+
+{% block content %}
+    <div class="container">
+        <div class="categories-block">
+            <div class="container owl-carousel">
+                {% for category_item in categories %}
+                    <div class="item">
+                        <a href="{% url 'brands' category_item.slug %}" class="categories-item">
+                            <span class="categories-item-title">{{category_item.name}}</span>
+                        </a>
+                    </div>
+                {% endfor %}
+            </div>
+        </div>
+    </div>
+{% endblock %}

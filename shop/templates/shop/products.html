@@ -1,0 +1,31 @@
+{% extends 'first/base.html' %}
+
+{% block title %}
+{% endblock %}
+
+{% block content %}
+    {% if products|length == 0 %}
+        <div>Список товаров отсутствует</div>
+    {% endif %}
+    <div class="row">
+        {% for product in products %}
+            <div class="col-md-3">
+                <div class="product_item">
+                    <div class="product_item-top">
+                        <a class="product_item-image" href="{% url 'detail' product.id %}">
+                            <img src="/media/{{product.image}}" width="140" height="140">
+                        </a>
+                        <a class="product_item-title" href="{% url 'detail' product.id %}">
+                            {{ product.name }}
+                        </a>
+                    </div>
+                    <div class="product_item-price">
+                        <div class="price">
+                            {{ product.price }}
+                        </div>
+                    </div>
+                </div>
+            </div>
+        {% endfor %}
+    </div>
+{% endblock %}

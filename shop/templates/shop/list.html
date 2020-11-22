@@ -1,0 +1,23 @@
+{% extends 'first/base.html' %}
+
+{% block title %}
+{% endblock %}
+
+{% block content %}
+    <div class="row">
+        {% for brand in brands %}
+            <div class="col-md-3">
+                <div class="product_item">
+                    <div class="product_item-top">
+                        <a class="product_item-image" href="{% url 'products' brand.slug %}">
+                            <img src="">
+                        </a>
+                        <a class="product_item-title" href="{% url 'products' brand.slug %}">
+                            <span class="text-center">{{ brand.name }}</span>
+                        </a>
+                    </div>
+                </div>
+            </div>
+        {% endfor %}
+    </div>
+{% endblock %}

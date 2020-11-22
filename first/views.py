@@ -1,4 +1,4 @@
-from django.shortcuts import render, redirect
+from django.shortcuts import render, redirect, HttpResponse
 from django.contrib import auth
 
 def loginPage(request):
@@ -8,10 +8,18 @@ def loginPage(request):
         password = request.POST.get('password', '')
         user = auth.authenticate(username=username, password=password)
         if user is not None:
-            auth.login(request,user)
-            return redirect('/')
+            auth.login(request, user)
+            if (user.groups.all()[0].name == 'Companies'):
+                return redirect('company/')
+            elif (user.groups.all()[0].name == 'Clients'):
+                return redirect('shop/')
+            elif (user.groups.all()[0].name == 'Admins'):
+                return redirect('admin/')
+            else:
+                return redirect('/')
         else:
-            context['login_error'] = 'Something wrong'
+            context['login_error'] = True
             return render(request, 'first/login.html', context)
     else:
+        context['login_error'] = False
         return render(request, 'first/login.html', context)

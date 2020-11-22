@@ -1,3 +1,5 @@
 from django.shortcuts import render
 
-# Create your views here.
+def mainPage(request):
+    context = {}
+    return render(request, 'company/main.html', context)

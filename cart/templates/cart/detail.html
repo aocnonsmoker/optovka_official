@@ -1,0 +1,42 @@
+{% extends 'first/base.html' %}
+{% load static %}
+{% block title %}
+{% endblock %}
+{% block content %}
+    <h1>Корзина</h1>
+    <table class="cart">
+        <tbody>
+        {% for item in cart %}
+            {% with product=item.product %}
+                <tr class="cart-row">
+                    <td>
+                        <a>
+                            <img src="
+                                {% if product.image %}
+                                    {{ product.image.url }}
+                                {% else %}
+                                    {% static 'img/no_image.png' %}
+                                {% endif %}" height="150" width="150">
+                        </a>
+                    </td>
+                    <td><div>{{ product.name }}</div>
+                        <div>{{ item.price }} тг.</div>
+                    </td>
+                    <td> - {{ item.quantity }} + </td>
+                    <td class="num">{{ item.total_price }} тг.</td>
+                    <td><a href="{% url 'cart:cart_remove' product.id%}">Х</a></td>
+                </tr>
+            {% endwith %}
+        {% endfor %}
+        <tr class="total">
+            <td>Итого</td>
+            <td colspan="4"></td>
+            <td class="num">{{ cart.get_total_price }} тг.</td>
+        </tr>
+        </tbody>
+    </table>
+    <p class="text-left">
+        <a href="/shop" class="button light">Continue shopping</a>
+        <a href="#" class="button">Checkout</a>
+    </p>
+{% endblock %}
