@@ -1,20 +1,53 @@
 {% extends 'first/base.html' %}
 {% load static %}
-{% block title %}
-{% endblock %}
 
 {% block content %}
-    <div class="container">
-        <div class="categories-block">
-            <div class="container owl-carousel">
-                {% for category_item in categories %}
-                    <div class="item">
-                        <a href="{% url 'brands' category_item.slug %}" class="categories-item">
-                            <span class="categories-item-title">{{category_item.name}}</span>
-                        </a>
-                    </div>
-                {% endfor %}
-            </div>
-        </div>
-    </div>
+    <section>
+		<div class="container">
+			<div class="row">
+				<div class="col-sm-3">
+					<div class="left-sidebar">
+						<h2>Категории</h2>
+						<div class="panel-group category-products" id="accordian"><!--category-productsr-->
+                            {% for category_item in categories %}
+                                <div class="panel panel-default">
+                                    <div class="panel-heading">
+                                        <h4 class="panel-title"><a href="{% url 'brands' category_item.slug %}">{{category_item.name}}</a></h4>
+                                    </div>
+                                </div>
+                            {% endfor %}
+						</div><!--/category-productsr-->
+					</div>
+				</div>
+				
+				<div class="col-sm-9 padding-right">
+					<div class="features_items"><!--features_items-->
+						<h2 class="title text-center">Популярные товары</h2>
+						{% for product in products %}
+                            <div class="col-sm-4">
+                                <div class="product-image-wrapper">
+                                    <div class="single-products">
+                                        <div class="productinfo text-center">
+                                            <a class="product_item-image" href="{% url 'detail' product.id %}">
+                                                <img src="/media/{{product.image}}" height="180" alt="" />
+                                            </a>
+                                            <h2>{{ product.price }}₸</h2>
+                                            <p>{{ product.name }}</p>
+                                            <a href="#" class="btn btn-default add-to-cart"><i class="fa fa-shopping-cart"></i>Add to cart</a>
+                                        </div>
+                                    </div>
+                                    <div class="choose">
+                                        <ul class="nav nav-pills nav-justified">
+                                            <li><a href=""><i class="fa fa-plus-square"></i>Add to wishlist</a></li>
+                                            <li><a href=""><i class="fa fa-plus-square"></i>Add to compare</a></li>
+                                        </ul>
+                                    </div>
+                                </div>
+                            </div>
+                        {% endfor %}
+					</div><!--features_items-->
+				</div>
+			</div>
+		</div>
+	</section>
 {% endblock %}
