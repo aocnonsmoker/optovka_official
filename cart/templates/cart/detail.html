@@ -75,9 +75,20 @@
                                     </td>
                                     <td class="cart_quantity">
                                         <div class="cart_quantity_button">
-                                            <a class="cart_quantity_up" href=""> + </a>
+                                            <form method="POST">
+                                                {% csrf_token %}
+                                                <input hidden type="text" name="product_plus" value="{{product.id}}">
+                                                <input type="submit" value=" + " class="cart_quantity_input">
+                                                <!-- <a class="cart_quantity_up" href="{% url 'cart:cart_update' product.id%}"> + </a> -->
+                                            </form>
+                                            <!-- <a class="cart_quantity_up" href="{% url 'cart:cart_update' product.id%}"> + </a> -->
                                             <input class="cart_quantity_input" type="text" name="quantity" value="{{ item.quantity }}" autocomplete="off" size="2">
-                                            <a class="cart_quantity_down" href=""> - </a>
+                                            <form method="POST">
+                                                {% csrf_token %}
+                                                <input hidden type="text" name="product_minus" value="{{product.id}}">
+                                                <input type="submit" value=" - " class="cart_quantity_input">
+                                                <!-- <a class="cart_quantity_up" href="{% url 'cart:cart_update' product.id%}"> + </a> -->
+                                            </form>
                                         </div>
                                     </td>
                                     <td class="cart_total">

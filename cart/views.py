@@ -17,6 +17,15 @@ def cart_add(request, product_id):
                  update_quantity=cd['update'])
     return redirect('cart:cart_detail')
 
+def cart_update(request, product_id):
+    cart = Cart(request)
+    product = get_object_or_404(Product, id=product_id)
+    for item in cart:
+        if item['product'] == product:
+            item['quantity'] += 1
+            cart.augment_quantity(quantity=item['quantity'], product_id=product_id)            
+    return redirect('cart:cart_detail')
+
 def cart_remove(request, product_id):
     cart = Cart(request)
     product = get_object_or_404(Product, id=product_id)
@@ -25,4 +34,14 @@ def cart_remove(request, product_id):
 
 def cart_detail(request):
     cart = Cart(request)
+    if request.POST:
+        product_id = request.POST.get('product_plus')
+        product = get_object_or_404(Product, id=product_id)
+        for item in cart:
+            if item['product'] == product:
+                item['quantity'] += 1
+                cart.add(product=product,
+                         quantity=item['quantity'],
+                         update_quantity=False)
+                print('success')
     return render(request, 'cart/detail.html', {'cart': cart})

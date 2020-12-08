@@ -4,7 +4,7 @@
 {% endblock %}
 
 {% block content %}
-    <div class="row">
+    <!-- <div class="row">
         <div class="col-12 col-lg-9">
             <div class="row">
                 <div class="col-12 col-sm-12">
@@ -45,5 +45,50 @@
             </div>
         </div>
         <div class="col-lg-3 cart-column"></div>
-    </div>
+    </div> -->
+
+    <section>
+		<div class="container">
+			<div class="row">
+				<div class="col-sm-3">
+					<div class="left-sidebar">
+						<h2>Category</h2>
+					</div>
+				</div>
+				
+				<div class="col-sm-9 padding-right">
+					<div class="product-details"><!--product-details-->
+						<div class="col-sm-5">
+							<div class="view-product">
+								<img src="/media/{{product.image}}" alt="" />
+							</div>
+						</div>
+						<div class="col-sm-7">
+							<div class="product-information"><!--/product-information-->
+                                <h2>{{ product.name }}</h2>
+                                <p>{{ product.description }}</p>
+								<span>
+									<span>{{ product.price }}</span>
+                                    <form action="{% url 'cart:cart_add' product.id %}" method="post">
+                                        {{ cart_product_form }}
+                                        {% csrf_token %}
+                                        <button type="submit" class="btn btn-fefault cart">
+                                            <i class="fa fa-shopping-cart"></i>
+                                            В корзину
+                                        </button>
+                                    </form>
+								</span>
+                                <p><b>Статус</b>  
+                                    {% if product.available == True %} 
+                                        Есть в наличии 
+                                    {% else %}
+                                        Нет в наличии
+                                    {% endif %}</p>
+							</div><!--/product-information-->
+						</div>
+					</div><!--/product-details-->
+				</div>
+			</div>
+		</div>
+	</section>
 {% endblock %}

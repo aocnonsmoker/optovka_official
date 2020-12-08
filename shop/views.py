@@ -9,6 +9,7 @@ def shopPage(request, category_slug=None):
     products = sorted(Product.objects.all(), key=lambda x: random.random())
     context['products'] = products
     context['categories'] = categories
+    print(request.path)
     return render(request, 'shop/shop.html', context)
 
 def shopMain(request):
@@ -34,7 +35,6 @@ def brand_list(request, slug):
             product_all.append(prod)
     context['brands'] = brand_arr
     context['product_all'] = product_all
-    print(product_all)
     return render(request, 'shop/list.html', context)
 
 def products_list(request, slug):
@@ -49,5 +49,5 @@ def product_detail(request, id):
     context = {}
     product = Product.objects.get(id=id)
     context['product'] = product
-    context['cart_product_form'] = CartAddProductForm()
+    context['cart_product_form'] = CartAddProductForm(initial={'quantity': product.min_order})
     return render(request, 'shop/detail.html', context)

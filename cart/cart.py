@@ -45,6 +45,11 @@ class Cart(object):
             del self.cart[product_id]
             self.save()
 
+    def augment_quantity(self, quantity, product_id):
+        """ called when a POST request comes in for a Product instance already in the shopping cart """
+        self.cart[str(product_id)]['quantity'] = quantity
+        print(self.cart)
+
     def __iter__(self):
         """
         Перебор элементов в корзине и получение продуктов из базы данных.
