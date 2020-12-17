@@ -34,14 +34,7 @@ def cart_remove(request, product_id):
 
 def cart_detail(request):
     cart = Cart(request)
-    if request.POST:
-        product_id = request.POST.get('product_plus')
-        product = get_object_or_404(Product, id=product_id)
-        for item in cart:
-            if item['product'] == product:
-                item['quantity'] += 1
-                cart.add(product=product,
-                         quantity=item['quantity'],
-                         update_quantity=False)
-                print('success')
-    return render(request, 'cart/detail.html', {'cart': cart})
+    total_sum = 0
+    for item in cart:
+        total_sum += item['total_price']
+    return render(request, 'cart/detail.html', {'cart': cart, 'total': total_sum})

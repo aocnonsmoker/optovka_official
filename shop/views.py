@@ -9,7 +9,6 @@ def shopPage(request, category_slug=None):
     products = sorted(Product.objects.all(), key=lambda x: random.random())
     context['products'] = products
     context['categories'] = categories
-    print(request.path)
     return render(request, 'shop/shop.html', context)
 
 def shopMain(request):

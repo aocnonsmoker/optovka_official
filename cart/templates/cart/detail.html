@@ -44,7 +44,7 @@
 			<div class="table-responsive cart_info">
 				<table class="table table-condensed">
 					<thead>
-						<tr class="cart_menu">
+						<tr class="cart_menu">  
 							<td class="image">Товар</td>
 							<td class="description"></td>
 							<td class="price">Цена</td>
@@ -54,52 +54,103 @@
 						</tr>
 					</thead>
 					<tbody>
-                        {% for item in cart %}
-                            {% with product=item.product %}
+                        {% if cart|length > 0 %}
+                            {% for item in cart %}
+                                {% with product=item.product %}
+                                    <tr>
+                                        <td class="cart_product">
+                                            <a>
+                                                <img src="
+                                                    {% if product.image %}
+                                                        {{ product.image.url }}
+                                                    {% else %}
+                                                        {% static 'img/no_image.png' %}
+                                                    {% endif %}" height="150" width="150">
+                                            </a>
+                                        </td>
+                                        <td class="cart_description">
+                                            <h4><a href="">{{ product.name }}</a></h4>
+                                        </td>
+                                        <td class="cart_price">
+                                            <p>{{ item.price }} тг.</p>
+                                        </td>
+                                        <td class="cart_quantity">
+                                            <div class="cart_quantity_button">
+                                                <form method="POST">
+                                                    {% csrf_token %}
+                                                    <input hidden type="text" name="product_plus" value="{{product.id}}">
+                                                    <input type="submit" value=" + " class="cart_quantity_input">
+                                                    <!-- <a class="cart_quantity_up" href="{% url 'cart:cart_update' product.id%}"> + </a> -->
+                                                </form>
+                                                <!-- <a class="cart_quantity_up" href="{% url 'cart:cart_update' product.id%}"> + </a> -->
+                                                <input class="cart_quantity_input" type="text" name="quantity" value="{{ item.quantity }}" autocomplete="off" size="2">
+                                                <form method="POST">
+                                                    {% csrf_token %}
+                                                    <input hidden type="text" name="product_minus" value="{{product.id}}">
+                                                    <input type="submit" value=" - " class="cart_quantity_input">
+                                                    <!-- <a class="cart_quantity_up" href="{% url 'cart:cart_update' product.id%}"> + </a> -->
+                                                </form>
+                                            </div>
+                                        </td>
+                                        <td class="cart_total">
+                                            <p class="cart_total_price">{{ item.total_price }} тг.</p>
+                                        </td>
+                                        <td class="cart_delete">
+                                            <a class="cart_quantity_delete" href="{% url 'cart:cart_remove' product.id%}"><i class="fa fa-times"></i></a>
+                                        </td>
+                                    </tr>
+                                {% endwith %}
+                            {% endfor %}
+                            {% if total > 0 %}
                                 <tr>
                                     <td class="cart_product">
-                                        <a>
-                                            <img src="
-                                                {% if product.image %}
-                                                    {{ product.image.url }}
-                                                {% else %}
-                                                    {% static 'img/no_image.png' %}
-                                                {% endif %}" height="150" width="150">
-                                        </a>
                                     </td>
                                     <td class="cart_description">
-                                        <h4><a href="">{{ product.name }}</a></h4>
                                     </td>
                                     <td class="cart_price">
-                                        <p>{{ item.price }} тг.</p>
                                     </td>
                                     <td class="cart_quantity">
-                                        <div class="cart_quantity_button">
-                                            <form method="POST">
-                                                {% csrf_token %}
-                                                <input hidden type="text" name="product_plus" value="{{product.id}}">
-                                                <input type="submit" value=" + " class="cart_quantity_input">
-                                                <!-- <a class="cart_quantity_up" href="{% url 'cart:cart_update' product.id%}"> + </a> -->
-                                            </form>
-                                            <!-- <a class="cart_quantity_up" href="{% url 'cart:cart_update' product.id%}"> + </a> -->
-                                            <input class="cart_quantity_input" type="text" name="quantity" value="{{ item.quantity }}" autocomplete="off" size="2">
-                                            <form method="POST">
-                                                {% csrf_token %}
-                                                <input hidden type="text" name="product_minus" value="{{product.id}}">
-                                                <input type="submit" value=" - " class="cart_quantity_input">
-                                                <!-- <a class="cart_quantity_up" href="{% url 'cart:cart_update' product.id%}"> + </a> -->
-                                            </form>
-                                        </div>
+                                        <p>Итого: </p>
                                     </td>
                                     <td class="cart_total">
-                                        <p class="cart_total_price">{{ item.total_price }} тг.</p>
+                                        <p class="cart_total_price">{{total}} тг.</p>
                                     </td>
                                     <td class="cart_delete">
-                                        <a class="cart_quantity_delete" href="{% url 'cart:cart_remove' product.id%}"><i class="fa fa-times"></i></a>
                                     </td>
                                 </tr>
-                            {% endwith %}
-                        {% endfor %}
+                                <tr>
+                                    <td class="cart_product">
+                                    </td>
+                                    <td class="cart_description">
+                                    </td>
+                                    <td class="cart_price">
+                                    </td>
+                                    <td class="cart_quantity">
+                                    </td>
+                                    <td class="cart_total">
+                                        <button type="submit" href="#" class="cart_total_price btn">Оформить заказ</button>
+                                    </td>
+                                    <td class="cart_delete">
+                                    </td>
+                                </tr>
+                            {% endif %}
+                        {% else %}
+                            <tr>
+                                <td class="cart_product">
+                                </td>
+                                <td class="cart_description">
+                                </td>
+                                <td class="cart_price">
+                                </td>
+                                <td class="cart_quantity">
+                                    <div>У вас нет товаров в корзине</div>
+                                </td>
+                                <td class="cart_total">
+                                </td>
+                                <td class="cart_delete">
+                                </td>
+                            </tr>
+                        {% endif %}
 					</tbody>
 				</table>
 			</div>
