@@ -3,6 +3,7 @@ from django.views.decorators.http import require_POST
 from shop.models import Product
 from .cart import Cart
 from .forms import CartAddProductForm
+from django.contrib import auth
 
 
 @require_POST
@@ -37,4 +38,6 @@ def cart_detail(request):
     total_sum = 0
     for item in cart:
         total_sum += item['total_price']
+    username = request.user.get_full_name
+    print(username)
     return render(request, 'cart/detail.html', {'cart': cart, 'total': total_sum})

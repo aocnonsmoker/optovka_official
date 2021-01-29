@@ -45,7 +45,8 @@ INSTALLED_APPS = [
     'first',
     'cart',
     'shop',
-    'company'
+    'company',
+    'order'
 ]
 
 MIDDLEWARE = [
@@ -108,6 +109,8 @@ AUTH_PASSWORD_VALIDATORS = [
         'NAME': 'django.contrib.auth.password_validation.NumericPasswordValidator',
     },
 ]
+
+AUTH_USER_MODEL = 'first.CustomUser' 
 
 
 # Internationalization

@@ -2,6 +2,7 @@ import random
 from django.shortcuts import render
 from .models import Category, Brand, Product
 from cart.forms import CartAddProductForm
+from first.models import CustomUser
 
 def shopPage(request, category_slug=None):
     context = {}
@@ -9,6 +10,7 @@ def shopPage(request, category_slug=None):
     products = sorted(Product.objects.all(), key=lambda x: random.random())
     context['products'] = products
     context['categories'] = categories
+    print(CustomUser.objects.all())
     return render(request, 'shop/shop.html', context)
 
 def shopMain(request):

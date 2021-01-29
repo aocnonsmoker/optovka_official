@@ -1,0 +1,86 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="">
+    <meta name="author" content="">
+    <title>Home | E-Shopper</title>
+    <link href="{% static '/css/bootstrap.min.css' %}" rel="stylesheet">
+    <link href="{% static '/css/font-awesome.min.css' %}" rel="stylesheet">
+    <link href="{% static '/css/prettyPhoto.css' %}" rel="stylesheet">
+    <link href="{% static '/css/price-range.css' %}" rel="stylesheet">
+    <link href="{% static '/css/animate.css' %}" rel="stylesheet">
+	<link href="{% static '/css/main.css' %}" rel="stylesheet">
+	<link href="{% static '/css/responsive.css' %}" rel="stylesheet">
+</head><!--/head-->
+
+<body>
+	<header id="header">
+		<div class="header-middle">
+			<div class="container">
+				<div class="row">
+					<div class="col-sm-4">
+						<div class="logo pull-left">
+							<a><span>Optovka.kz | Management</span></a>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+    </header>
+    
+    <div class="container">
+        <seciton>
+            <form method="POST">
+                {% csrf_token %}
+                <div class="mb-3">
+                  <label for="username" class="form-label">Username</label>
+                  <input name="username" type="text" class="form-control" id="username" aria-describedby="emailHelp">
+                </div>
+                <div class="mb-3">
+                    <label for="mainname" class="form-label">Main name</label>
+                    <input name="mainname" type="text" class="form-control" id="mainname" aria-describedby="emailHelp">
+                </div>
+                <div class="mb-3">
+                  <label for="userpassword" class="form-label">Password</label>
+                  <input name="userpassword" type="password" class="form-control" id="userpassword">
+                </div>
+                <div class="mb-3">
+                    <label for="telephone" class="form-label">Telephone</label>
+                    <input name="telephone" type="tel" class="form-control" id="telephone">
+                </div>
+                <div class="mb-3">
+                    <label for="address" class="form-label">Address</label>
+                    <input name="address" type="text" class="form-control" id="address">
+                </div>
+                <div class="mb-3">
+                    <label for="city" class="form-label">City</label>
+                    <input name="city" type="text" class="form-control" id="city">
+                </div>
+                <div class="mb-3">
+                    <label for="activity" class="form-label">Activity</label>
+                    <select required name="activity" id="activity" class="form-select">
+                        <option value="1">Client</option>
+                        <option value="2">Company</option>
+                        <option value="3">Admin</option>
+                    </select>
+                </div>
+                <!-- <div class="mb-3 form-check">
+                  <input type="checkbox" class="form-check-input" id="exampleCheck1">
+                  <label class="form-check-label" for="exampleCheck1">Check me out</label>
+                </div> -->
+                <button type="submit" class="btn btn-primary">Submit</button>
+            </form>
+        </seciton>
+    </div>
+	  
+    <script src="{% static '/js/jquery.js' %}"></script>
+	<script src="{% static '/js/bootstrap.min.js' %}"></script>
+	<script src="{% static '/js/jquery.scrollUp.min.js' %}"></script>
+	<script src="{% static '/js/price-range.js' %}"></script>
+    <script src="{% static '/js/jquery.prettyPhoto.js' %}"></script>
+    <script src="{% static '/js/main.js' %}"></script>
+</body>
+</html>
