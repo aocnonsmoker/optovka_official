@@ -113,7 +113,7 @@
                                         <p>Итого: </p>
                                     </td>
                                     <td class="cart_total">
-                                        <p class="cart_total_price">{{total}} тг.</p>
+                                        <p class="cart_total_price">{{total}} тг. {{fName}}</p>
                                     </td>
                                     <td class="cart_delete">
                                     </td>
@@ -128,17 +128,19 @@
                                     <td class="cart_quantity">
                                     </td>
                                     <td class="cart_total">
-                                        <form>
+                                        <form method="POST">
                                             {% csrf_token %}
-                                            <input class="name" hidden>
-                                            <input class="address" hidden>
-                                            <input class="city" hidden>
-                                            <input class="paid" hidden>
+                                            <input class="name" hidden name="name" value="{{name}}">
+                                            <input class="tel" hidden name="telephone" value="{{telephone}}">
+                                            <input class="address" hidden name="address" value="{{address}}">
+                                            <input class="city" hidden name="city" value="{{city}}">
+                                            <input class="activity" hidden name="activity" value="{{activity}}">
                                             <button type="submit" href="#" class="cart_total_price btn">Оформить заказ</button>
                                         </form>
                                         
                                     </td>
                                     <td class="cart_delete">
+                                    
                                     </td>
                                 </tr>
                             {% endif %}

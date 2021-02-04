@@ -2,7 +2,8 @@ from django.shortcuts import render, redirect, get_object_or_404
 from django.views.decorators.http import require_POST
 from shop.models import Product
 from .cart import Cart
-from .forms import CartAddProductForm
+from .forms import CartAddProductForm, OrderCreateForm
+from .models import OrdersItem
 from django.contrib import auth
 
 
@@ -38,6 +39,39 @@ def cart_detail(request):
     total_sum = 0
     for item in cart:
         total_sum += item['total_price']
-    username = request.user.get_full_name
-    print(username)
-    return render(request, 'cart/detail.html', {'cart': cart, 'total': total_sum})
+    current_user = request.user
+    user_id = current_user.id
+    print(user_id)
+    fName = current_user.first_name
+    tel = current_user.telephone
+    address = current_user.address
+    city = current_user.city
+    activity = current_user.activity
+    if request.method == 'POST':
+        print('here')
+        form = OrderCreateForm(request.POST)
+        if form.is_valid():
+            for item in cart:
+                order = form.save()
+                OrdersItem.objects.create(order=order,
+                                         product=item['product'],
+                                         price=item['price'],
+                                         quantity=item['quantity'])
+            # очистка корзины
+            cart.clear()
+            return redirect('order/')
+    else:
+        print('error')
+    context = {
+        'cart': cart,
+        'total': total_sum,
+        'name': fName,
+        'telephone': tel,
+        'address': address,
+        'city': city,
+        'activity': activity
+    }
+    return render(request, 'cart/detail.html', context)
+
+def order_created(request):
+    return render(request, 'cart/order.html')

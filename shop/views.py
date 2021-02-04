@@ -10,12 +10,7 @@ def shopPage(request, category_slug=None):
     products = sorted(Product.objects.all(), key=lambda x: random.random())
     context['products'] = products
     context['categories'] = categories
-    print(CustomUser.objects.all())
     return render(request, 'shop/shop.html', context)
-
-def shopMain(request):
-    context = {}
-    return render(request, 'shop/main.html', context)
 
 def brand_list(request, slug):
     context = {}
