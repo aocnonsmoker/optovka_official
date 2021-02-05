@@ -1,5 +1,6 @@
 from django.db import models
 from shop.models import Product
+from django.utils import timezone
 
 
 class Orders(models.Model):
@@ -26,6 +27,7 @@ class Orders(models.Model):
 class OrdersItem(models.Model):
     order = models.ForeignKey(Orders, related_name='items', on_delete=models.CASCADE)
     product = models.ForeignKey(Product, related_name='order_items', on_delete=models.CASCADE)
+    brand = models.IntegerField(default=0)
     price = models.DecimalField(max_digits=10, decimal_places=2)
     quantity = models.PositiveIntegerField(default=1)
 

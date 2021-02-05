@@ -1,0 +1,168 @@
+{% load static %}
+<html>
+    <head>
+        <title>Авторизация</title>
+        <meta charset="UTF-8">
+        <meta name="viewport"
+              content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+        <meta http-equiv="X-UA-Compatible" content="ie=edge">
+        <link rel="stylesheet" href="{% static '/css/bootstrap.min.css' %}">
+        <script src="{% static '/js/main.js' %}"></script>
+        <script src="{% static '/js/bootstrap.min.js' %}"></script>
+    </head>
+    <body>
+        <div class="container">
+            Извините, но вы не являетесь товаро-производителем. Обратитесь технической службе
+        </div>
+        <style>
+            body {
+                background: #2fc6f7;
+                -webkit-box-sizing: border-box;
+                -moz-box-sizing: border-box;
+                box-sizing: border-box;
+                height: 100%;
+                font-family: "Helvetica Neue",Helvetica,Arial,sans-serif;
+                min-height: 650px;
+                margin: 0;
+                min-width: 1024px;
+                padding: 0;
+            }
+            .loginBlock {
+                border-spacing: 0;
+                height: 100%;
+                overflow: hidden;
+                width: 100%;
+            }
+
+            .loginBlock tbody {
+                display: table-row-group;
+                vertical-align: middle;
+                border-color: inherit;
+            }
+
+            .loginBlock tr {
+                display: table-row;
+                vertical-align: inherit;
+                border-color: inherit;
+            }
+
+            .logo-title, .support {
+                height: 25%;
+                text-align: center;
+                vertical-align: middle;
+                padding: 0;
+            }
+
+            .loginField {
+                padding: 0;
+            text-align: center;
+            vertical-align: middle;
+            }
+
+            .log-wrap {
+                display: inline-block;
+                position: relative;
+            }
+
+            .log-block {
+                background-color: #fff;
+                border-radius: 4px;
+                display: block;
+                text-align: left;
+                width: 650px;
+                position: relative;
+                padding: 30px 35px;
+            }
+
+            .log-block-header {
+                vertical-align: bottom;
+                text-transform: none;
+                font-weight: normal;
+                font-size: 32px;
+                font-family: 'geometriamedium';
+                line-height: 35px;
+            }
+
+            .log-line {
+                border: 0;
+                border-bottom: 1px solid #f2f2f2;
+            }
+
+            form {
+                display: block;
+                margin-top: 0em;
+            }
+
+            .login-input {
+                margin: 17px 0;
+                margin-left: auto;
+                margin-right: auto;
+                width: 75%;
+            }
+
+            .login-field {
+                height: 50px;
+                border-radius: 4px;
+                line-height: 40px;
+                padding: 5px 10px;
+                font-size: 19px;
+                -webkit-box-sizing: border-box;
+                -moz-box-sizing: border-box;
+                box-sizing: border-box;
+                margin-bottom: 5px;
+                padding: 5px 6px;
+                outline: 0;
+                border: 2px solid #d5dde0;
+                border-radius: 5px;
+                background-color: #fff;
+                background-image: none;
+                color: #555;
+                vertical-align: middle;
+                line-height: 1.428571429;
+                -webkit-transition: border-color ease-in-out .15s;
+                transition: border-color ease-in-out .15s;
+                width: 100%;
+            }
+
+            .login-submit {
+                height: 45px;
+                padding-top: 17px;
+                position: relative;
+                text-align: center;
+            }
+
+            .login-btn {
+                background: #2fc6f7;
+                color: #fff;
+                display: inline-block;
+                outline: none!important;
+                border: 0;
+                vertical-align: middle;
+                text-decoration: none;
+                cursor: pointer;
+                font-family: 'geometriamedium';
+                border-radius: 20px;
+                padding: 0 30px;
+                height: 42px;
+                line-height: 42px;
+                font-size: 21px!important;
+                -webkit-appearance: none;
+            }
+
+            .errortext {
+                background: #f9ebee;
+                border: 1px solid;
+                border-color: #d5c1b4 #e6d2cd #f2dedf;
+                border-radius: 6px;
+                font-weight: bold;
+                color: #bb404c;
+                font-size: 14px;
+                min-height: 16px;
+                margin: 0 0 12px;
+                text-shadow: 0 1px rgba(255,255,255,.89);
+                padding: 10px 0 10px 42px;
+                position: relative;
+            }
+        </style>
+    </body>
+</html>

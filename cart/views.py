@@ -41,27 +41,25 @@ def cart_detail(request):
         total_sum += item['total_price']
     current_user = request.user
     user_id = current_user.id
-    print(user_id)
     fName = current_user.first_name
     tel = current_user.telephone
     address = current_user.address
     city = current_user.city
     activity = current_user.activity
     if request.method == 'POST':
-        print('here')
         form = OrderCreateForm(request.POST)
         if form.is_valid():
             for item in cart:
                 order = form.save()
+                product_id = Product.objects.filter(name=item['product'])
                 OrdersItem.objects.create(order=order,
                                          product=item['product'],
+                                         brand=product_id[0].brand_id,
                                          price=item['price'],
                                          quantity=item['quantity'])
             # очистка корзины
             cart.clear()
             return redirect('order/')
-    else:
-        print('error')
     context = {
         'cart': cart,
         'total': total_sum,
